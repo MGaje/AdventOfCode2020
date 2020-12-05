@@ -1,0 +1,1 @@
+export { InputReader } from './input-reader.class';
