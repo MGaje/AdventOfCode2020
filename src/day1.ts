@@ -12,19 +12,19 @@ export class Day1 implements IRunnable<number | null> {
         this._input = this._inputReader.getInput();
     }
 
-    public getCombinations(size: number): string[] {
-        return combinations(this._input, size, size).map((x: string[]) => x.join(','));
+    public getCombinations(size: number): number[][] {
+        // Using maps like I'm a cartographer! *finger guns*
+        return combinations(this._input, size, size).map(outer => outer.map(inner => +inner));
     }
 
-    public findTargetResult(comboSize: number): number | null {
+    public findTargetResult(comboSize: number, target: number): number | null {
         let parsedResult: number | null = null;
 
-        this.getCombinations(comboSize).forEach(src => {
-            const parsed: number[] = src.split(',').map(x => +x);
-            const sum: number = parsed.reduce((acc, v) => acc + v, 0);
+        this.getCombinations(comboSize).forEach(combo => {
+            const sum: number = combo.reduce((acc, v) => acc + v, 0);
 
-            if (sum === 2020) {
-                parsedResult = parsed.reduce((acc, v) => acc * v, 1);
+            if (sum === target) {
+                parsedResult = combo.reduce((acc, v) => acc * v, 1);
                 return;
             }
         });
@@ -33,10 +33,10 @@ export class Day1 implements IRunnable<number | null> {
     }
 
     public runPart1(): number | null {
-        return this.findTargetResult(2);
+        return this.findTargetResult(2, 2020);
     }
 
     public runPart2(): number | null {
-        return this.findTargetResult(3);
+        return this.findTargetResult(3, 2020);
     }
 }
