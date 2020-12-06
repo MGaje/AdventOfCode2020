@@ -1,15 +1,11 @@
 
 import * as combinations from 'combinations';
-import { InputReader } from './shared/classes/input-reader.class';
-import { IRunnable } from './shared/interfaces';
+import { BaseDay } from './shared/classes';
 
-export class Day1 implements IRunnable<number | null> {
-    private _inputReader: InputReader;
-    private _input: string[];
+export class Day1 extends BaseDay<number | null> {
 
     constructor() {
-        this._inputReader = new InputReader('../input/day1.txt');
-        this._input = this._inputReader.getInput();
+        super('../input/day1.txt');
     }
 
     public getCombinations(size: number): number[][] {
