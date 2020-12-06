@@ -1,0 +1,1 @@
+export { DirectionEnum } from './direction.enum';
